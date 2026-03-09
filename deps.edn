@@ -1,0 +1,19 @@
+{:deps {}
+ :aliases
+ {:test       {:extra-paths ["test"]
+               :extra-deps  {lambdaisland/kaocha {:mvn/version "1.91.1392"}}
+               :main-opts   ["--main" "kaocha.runner"]
+               :exec-fn     kaocha.runner/exec-fn
+               :exec-args   {:randomize? false
+                             :fail-fast? false}}
+  :lib/kaocha {:extra-deps {lambdaisland/kaocha {:mvn/version "1.91.1392"}}}
+  :repl/rebel
+  {:extra-deps {nrepl/nrepl                   {:mvn/version "1.5.2"}
+                cider/cider-nrepl             {:mvn/version "0.58.0"}
+                refactor-nrepl/refactor-nrepl {:mvn/version "3.11.0"}
+                com.bhauman/rebel-readline    {:mvn/version "0.1.5"}}
+   :main-opts  ["--eval" "(apply require clojure.main/repl-requires)"
+                "--main" "nrepl.cmdline"
+                "--middleware" "[cider.nrepl/cider-middleware refactor-nrepl.middleware/wrap-refactor]"
+                "--interactive"
+                "-f" "rebel-readline.main/-main"]}}}
